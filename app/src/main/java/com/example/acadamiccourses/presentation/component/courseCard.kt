@@ -44,12 +44,16 @@ fun CourseCard(
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
         CourseCardBackground(iconResId = categoryIcon, state, categoryColor, onCardClick)
-
     }
 }
 
 @Composable
-private fun CourseCardBackground(iconResId: Int, state: CourseItemState, categoryColor: Color, onCardClick:() -> Unit) {
+private fun CourseCardBackground(
+    iconResId: Int,
+    state: CourseItemState,
+    categoryColor: Color,
+    onCardClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
