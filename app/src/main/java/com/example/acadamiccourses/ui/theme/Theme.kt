@@ -1,53 +1,57 @@
 package com.example.acadamiccourses.ui.theme
 
-import androidx.compose.foundation.layout.RowScope
-import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun AcademicAppBar(
-    title: String,
-    backgroundColor: Color = MaterialTheme.colorScheme.primaryContainer,
-    actions: @Composable RowScope.() -> Unit = {}
-) {
-    CenterAlignedTopAppBar(
-        title = {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.onPrimaryContainer
-            )
-        },
-        colors = TopAppBarDefaults.centerAlignedTopAppBarColors(
-            containerColor = backgroundColor,
-            titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer,
-            actionIconContentColor = MaterialTheme.colorScheme.onPrimaryContainer
-        ),
-        actions = actions
-    )
-}
+private val LightColorScheme = lightColorScheme(
+    primary = Color(0xFF1565C0),
+    onPrimary = Color.White,
+    primaryContainer = Color(0xFF90CAF9),
+    onPrimaryContainer = Color(0xFF0D47A1),
 
+    secondary = Color(0xFF00ACC1),
+    onSecondary = Color.White,
+    secondaryContainer = Color(0xFFB2EBF2),
+    onSecondaryContainer = Color(0xFF006064),
 
-private val LightColors = lightColorScheme()
-private val DarkColors = darkColorScheme()
+    background = Color(0xFFF5F5F5),
+    onBackground = Color.Black,
+
+    surface = Color.White,
+    onSurface = Color.Black,
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = Color(0xFF90CAF9),
+    onPrimary = Color.Black,
+    primaryContainer = Color(0xFF0D47A1),
+    onPrimaryContainer = Color.White,
+
+    secondary = Color(0xFF80DEEA),
+    onSecondary = Color.Black,
+    secondaryContainer = Color(0xFF004D40),
+    onSecondaryContainer = Color.White,
+
+    background = Color(0xFF121212),
+    onBackground = Color.White,
+
+    surface = Color(0xFF1E1E1E),
+    onSurface = Color.White,
+)
 
 @Composable
 fun AcadamicCourseTheme(
-    darkTheme: Boolean = false,
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
+    val colors = if (darkTheme) DarkColorScheme else LightColorScheme
+
     MaterialTheme(
-        colorScheme = if (darkTheme) DarkColors else LightColors,
-        typography = MaterialTheme.typography,
-        shapes = MaterialTheme.shapes,
+        colorScheme = colors,
+        typography = Typography,
+        shapes = Shapes,
         content = content
     )
 }

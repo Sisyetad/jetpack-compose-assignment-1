@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.contentDescription
@@ -25,8 +26,8 @@ fun CourseListScreen(
     courseListState: CourseListState,
     onItemClick: (Int) -> Unit
 ) {
-    var searchQuery by remember { mutableStateOf("") }
-    var isSearchActive by remember { mutableStateOf(false) }
+    var searchQuery by rememberSaveable { mutableStateOf("") }
+    var isSearchActive by rememberSaveable { mutableStateOf(false) }
 
     val filteredCourses = remember(courseListState.courses, searchQuery) {
         if (searchQuery.isBlank()) {
@@ -54,7 +55,7 @@ fun CourseListScreen(
             } else {
                 AcademicAppBar(
                     title = "Explore Courses",
-                    backgroundColor = MaterialTheme.colorScheme.primaryContainer,
+                    backgroundColor = MaterialTheme.colorScheme.onTertiaryContainer,
                     actions = {
                         IconButton(
                             onClick = { isSearchActive = true },
@@ -65,7 +66,7 @@ fun CourseListScreen(
                             Icon(
                                 imageVector = Icons.Default.Search,
                                 contentDescription = "Search Courses",
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                tint = MaterialTheme.colorScheme.onPrimary
                             )
                         }
                     }
