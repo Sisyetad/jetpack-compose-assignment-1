@@ -26,18 +26,23 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun MainScreen() {
     val viewModel = remember {
         CourseViewModel(repository = CourseRepository())
     }
+
     val state by viewModel.state.collectAsState()
 
     CourseListScreen(
         courseListState = state,
-        onItemClick = { courseKey -> viewModel.toggleExpanded(courseKey) }
+        onItemClick = { courseKey ->
+            viewModel.toggleExpanded(courseKey)
+        }
     )
 }
+
 
 
 @Preview(

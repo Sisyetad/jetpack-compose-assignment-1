@@ -10,7 +10,6 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -29,7 +28,7 @@ fun CourseListScreen(
     var searchQuery by rememberSaveable { mutableStateOf("") }
     var isSearchActive by rememberSaveable { mutableStateOf(false) }
 
-    val filteredCourses = remember(courseListState.courses, searchQuery) {
+    val filteredCourses = rememberSaveable(courseListState.courses, searchQuery) {
         if (searchQuery.isBlank()) {
             courseListState.courses
         } else {
